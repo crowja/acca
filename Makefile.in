@@ -1,0 +1,103 @@
+SHELL = /bin/bash
+
+.POSIX:
+.SUFFIXES:
+.SUFFIXES:
+
+SRC_DIR      = ./src
+BUILD_DIR    = ./build
+
+CC           = gcc
+CPPFLAGS     = -I$(SRC_DIR) -DPACKAGE_VERSION="@PACKAGE_VERSION@"
+CFLAGS       = -std=c99 -pedantic -Wall
+LDFLAGS      =
+
+MKDIR        = mkdir -p
+
+.PHONY: clean dirs
+
+all: dirs $(BUILD_DIR)/acca
+
+dirs:
+	@$(MKDIR) $(BUILD_DIR)
+
+$(BUILD_DIR)/acca: $(BUILD_DIR)/fgetopt.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/linereader.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/linewrapper.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/main.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/options.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/tokenset.o
+$(BUILD_DIR)/acca: $(BUILD_DIR)/varstr.o
+$(BUILD_DIR)/acca: 
+	$(CC) -o $(BUILD_DIR)/acca \
+		$(BUILD_DIR)/fgetopt.o \
+		$(BUILD_DIR)/linereader.o \
+		$(BUILD_DIR)/linewrapper.o \
+		$(BUILD_DIR)/main.o \
+		$(BUILD_DIR)/options.o \
+		$(BUILD_DIR)/tokenset.o \
+		$(BUILD_DIR)/varstr.o \
+		$(LDFLAGS)
+
+$(BUILD_DIR)/fgetopt.o: $(SRC_DIR)/fgetopt.c $(SRC_DIR)/fgetopt.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/fgetopt.o $(SRC_DIR)/fgetopt.c
+
+$(BUILD_DIR)/linereader.o: $(SRC_DIR)/linereader.c $(SRC_DIR)/linereader.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/linereader.o $(SRC_DIR)/linereader.c
+
+$(BUILD_DIR)/linewrapper.o: $(SRC_DIR)/linewrapper.c $(SRC_DIR)/linewrapper.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/linewrapper.o $(SRC_DIR)/linewrapper.c
+
+$(BUILD_DIR)/main.o: $(SRC_DIR)/main.c $(SRC_DIR)/main.h 
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/main.o $(SRC_DIR)/main.c
+
+$(BUILD_DIR)/options.o: $(SRC_DIR)/options.c $(SRC_DIR)/options.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/options.o $(SRC_DIR)/options.c
+
+$(BUILD_DIR)/tokenset.o: $(SRC_DIR)/tokenset.c $(SRC_DIR)/tokenset.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/tokenset.o $(SRC_DIR)/tokenset.c
+
+$(BUILD_DIR)/varstr.o: $(SRC_DIR)/varstr.c $(SRC_DIR)/varstr.h
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $(BUILD_DIR)/varstr.o $(SRC_DIR)/varstr.c
+
+
+# Example of how to template for variables set by configure
+howdy:
+
+clean:
+	$(RM) $(BUILD_DIR)/a.out $(BUILD_DIR)/*.o $(BUILD_DIR)/acca
+	$(RM) $(SRC_DIR)/a.out $(SRC_DIR)/*.o $(SRC_DIR)/*.c~ $(SRC_DIR)/*.h~
+
+# SQLITE3_CFLAGS    is @SQLITE3_CFLAGS@
+# SQLITE3_LDFLAGS   is @SQLITE3_LDFLAGS@
+# PACKAGE_NAME      is @PACKAGE_NAME@
+# PACKAGE_TARNAME   is @PACKAGE_TARNAME@
+# PACKAGE_VERSION   is @PACKAGE_VERSION@
+# PACKAGE_STRING    is @PACKAGE_STRING@
+# PACKAGE_BUGREPORT is @PACKAGE_BUGREPORT@
+# PACKAGE_URL       is @PACKAGE_URL@
+#
+# builddir          is @builddir@
+# abs_builddir      is @abs_builddir@
+# top_builddir      is @top_builddir@
+# abs_top_builddir  is @abs_top_builddir@
+# 
+# srcdir            is @srcdir@
+# abs_srcdir        is @abs_srcdir@
+# top_srcdir        is @top_srcdir@
+# abs_top_srcdir    is @abs_top_srcdir@
+#
+# CFLAGS            is @CFLAGS@
+# DEFS              is @DEFS@
+# LDFLAGS           is @LDFLAGS@
+# LIBS              is @LIBS@
+#
+# prefix            is @prefix@
+# exec_prefix       is @exec_prefix@
+#
+#                      @OPENMP_CFLAGS@"
+
+distclean:
+	$(MAKE) clean
+	$(RM) -r autom4te.cache  config.status config.log
+

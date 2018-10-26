@@ -1,0 +1,8 @@
+*.o
+*.c~
+*.h~
+*.a
+*.so
+*.dylib
+*.dSYM/
+a.out

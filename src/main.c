@@ -188,8 +188,7 @@ set_scores(struct options *o, unsigned r, unsigned c)
       xlabel = tokenset_get_by_id(xlabels, i);
 
 #ifdef  _OPENMP
-#pragma omp parallel
-#pragma omp for
+#pragma omp parallel for private (ylabel)
 #endif
       for (j = 0; j < c; j++) {
          double      p1, p2;

@@ -19,7 +19,6 @@
  *  Structure is defined in options.h since it needs to be visible.
  */
 
-
 /*** options_new() ***/
 
 struct options *
@@ -34,6 +33,7 @@ options_new(void)
    tp->all_asserts_flag = 0;
    tp->fname = NULL;
    tp->help_flag = 0;
+   tp->nthreads = 0;
    tp->quiet_flag = 0;
    tp->verbosity = 0;
    tp->version_flag = 0;
@@ -76,6 +76,12 @@ options_helpmsg(FILE *out)
    fprintf(out, "%s\n",
            lwrap_format(w, indent, width, "Print this help message and exit."));
 
+   fprintf(out, "%s\n", "-N<n>, --nthreads=<n>");
+   fprintf(out, "%s\n",
+           lwrap_format(w, indent, width,
+                        "Use <n> OpenMP threads. Default is one thread per "
+                        "cpu online."));
+
    fprintf(out, "%s\n", "-q, --quiet");
    fprintf(out, "%s\n",
            lwrap_format(w, indent, width,
@@ -100,11 +106,13 @@ void
 options_parse(struct options *p, int argc, char *argv[])
 {
    int         c;
+   int         t;
    int         oindex = 0;
-   char        opts[] = "ahp:qvV";
+   char        opts[] = "ahN:p:qvV";
    static struct option long_options[] = {
       {"all-asserts", no_argument, NULL, 'a'},
       {"help", no_argument, NULL, 'h'},
+      {"nthreads", required_argument, NULL, 'N'},
       {"prefix", required_argument, NULL, 'p'},
       {"quiet", no_argument, NULL, 'q'},
       {"version", no_argument, NULL, 'v'},
@@ -127,11 +135,17 @@ options_parse(struct options *p, int argc, char *argv[])
 
          case 'a':
             p->all_asserts_flag = 1;
-            return;
+            break;
 
          case 'h':
             p->help_flag = 1;
             return;
+
+         case 'N':
+            t = atoi(optarg);
+            if (t > 0)
+               p->nthreads = t;
+            break;
 
          case 'p':
             printf("prefix set as %s\n", optarg);

@@ -1,7 +1,7 @@
 /**
  *  @file main.c
  *  @version 0.0-alpha
- *  @date %TODAY%
+ *  @date Sat Nov  3 19:40:11 CDT 2018
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME
@@ -14,6 +14,9 @@
 #include "options.h"
 #include "linereader.h"
 #include "tokenset.h"
+#ifdef  _OPENMP
+#include <omp.h>
+#endif
 
 #ifdef  _IS_NULL
 #undef  _IS_NULL
@@ -168,6 +171,8 @@ set_scores(struct options *o, unsigned r, unsigned c)
       allsums += 1;
    }
 
+   /* Quick assessment of the count table */
+
 #if 0
    printf("%f\t%f\t|%f\n", table[0 * c + 0], table[0 * c + 1], rowsums[0]);
    printf("%f\t%f\t|%f\n", table[1 * c + 0], table[1 * c + 1], rowsums[1]);
@@ -182,6 +187,10 @@ set_scores(struct options *o, unsigned r, unsigned c)
 
       xlabel = tokenset_get_by_id(xlabels, i);
 
+#ifdef  _OPENMP
+#pragma omp parallel
+#pragma omp for
+#endif
       for (j = 0; j < c; j++) {
          double      p1, p2;
 
@@ -252,6 +261,18 @@ main(int argc, char *argv[])
       options_free(o);
       exit(0);
    }
+
+
+#ifdef  _OPENMP
+   if (o->nthreads > 1) {                        /* otherwise OpenMP default */
+      unsigned    max_threads = omp_get_max_threads();
+      o->nthreads = o->nthreads < max_threads ? o->nthreads : max_threads;
+      omp_set_num_threads(o->nthreads);
+   }
+
+   if (o->verbosity > 0)
+      printf("Using %d OpenMP thread(s)\n", omp_get_max_threads());
+#endif
 
    /* Get the input data */
 

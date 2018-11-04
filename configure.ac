@@ -26,8 +26,8 @@ dnl compiler already supports OpenMP, (b) if it has no way to
 dnl activate OpenMP support, or if the user overrides it via
 dnl "./configure --disable-openmp".
 AC_OPENMP
-m4_include([m4/ax_lib_sqlite3.m4])
-AX_LIB_SQLITE3
+dnl m4_include([m4/ax_lib_sqlite3.m4])
+dnl AX_LIB_SQLITE3
 
 dnl Process Makefile.in to create Makefile
 AC_CONFIG_FILES([Makefile])

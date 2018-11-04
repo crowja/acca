@@ -1,7 +1,7 @@
 /**
  *  @file main.h
  *  @version 0.0-alpha
- *  @date %TODAY%
+ *  @date Sat Nov  3 19:40:11 CDT 2018
  *  @copyright %COPYRIGHT%
  *  @brief FIXME
  *  @details FIXME

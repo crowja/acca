@@ -9,7 +9,7 @@ BUILD_DIR    = ./build
 
 CC           = gcc
 CPPFLAGS     = -I$(SRC_DIR) -DPACKAGE_VERSION="@PACKAGE_VERSION@"
-CFLAGS       = -std=c99 -pedantic -Wall
+CFLAGS       = -std=c99 -pedantic -Wall @OPENMP_CFLAGS@
 LDFLAGS      =
 
 MKDIR        = mkdir -p
@@ -29,7 +29,7 @@ $(BUILD_DIR)/acca: $(BUILD_DIR)/options.o
 $(BUILD_DIR)/acca: $(BUILD_DIR)/tokenset.o
 $(BUILD_DIR)/acca: $(BUILD_DIR)/varstr.o
 $(BUILD_DIR)/acca: 
-	$(CC) -o $(BUILD_DIR)/acca \
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/acca \
 		$(BUILD_DIR)/fgetopt.o \
 		$(BUILD_DIR)/linereader.o \
 		$(BUILD_DIR)/linewrapper.o \
@@ -95,7 +95,7 @@ clean:
 # prefix            is @prefix@
 # exec_prefix       is @exec_prefix@
 #
-#                      @OPENMP_CFLAGS@"
+#                      @OPENMP_CFLAGS@
 
 distclean:
 	$(MAKE) clean

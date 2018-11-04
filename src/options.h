@@ -2,6 +2,7 @@ struct options {
    char       *fname;                       /* input file name, if any */
    unsigned    all_asserts_flag;
    unsigned    help_flag;
+   unsigned    nthreads;
    unsigned    quiet_flag;
    unsigned    verbosity;
    unsigned    version_flag;

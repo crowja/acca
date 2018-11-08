@@ -15,6 +15,25 @@
 #endif
 #define _FREE(p)                ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
+#ifdef  QUOTE
+#undef  QUOTE
+#endif
+#define QUOTE(name) #name
+
+#ifdef  STR
+#undef  STR
+#endif
+#define STR(macro) QUOTE(macro)
+
+#ifndef PACKAGE_VERSION
+#define PACKAGE_VERSION dev
+#endif
+
+#ifdef  PACKAGE_VERSION_STR
+#undef  PACKAGE_VERSION_STR
+#endif
+#define PACKAGE_VERSION_STR STR(PACKAGE_VERSION)
+
 /**
  *  Structure is defined in options.h since it needs to be visible.
  */
@@ -31,6 +50,8 @@ options_new(void)
       return NULL;
 
    tp->all_asserts_flag = 0;
+   tp->appname = "acca";
+   tp->appvers = PACKAGE_VERSION_STR;
    tp->fname = NULL;
    tp->help_flag = 0;
    tp->nthreads = 0;
@@ -53,10 +74,10 @@ options_free(struct options *p)
    _FREE(p);
 }
 
-/*** options_helpmsg() ***/
+/*** options_help_msg() ***/
 
 void
-options_helpmsg(FILE *out)
+options_help_msg(struct options *p, FILE *out)
 {
    unsigned    indent = 5;
    unsigned    width = 75;
@@ -180,3 +201,7 @@ options_parse(struct options *p, int argc, char *argv[])
 
 #undef _IS_NULL
 #undef _FREE
+#undef QUOTE
+#undef STR
+#undef PACKAGE_VERSION
+#undef PACKAGE_VERSION_STR

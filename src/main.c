@@ -250,13 +250,13 @@ main(int argc, char *argv[])
    options_parse(o, argc, argv);
 
    if (o->help_flag) {
-      options_helpmsg(stderr);
+      options_help_msg(o, stderr);
       options_free(o);
       exit(0);
    }
 
    if (o->version_flag) {
-      printf("acca %s\n", PACKAGE_VERSION_STR);
+      printf("%s version %s\n", o->appname, o->appvers);
       options_free(o);
       exit(0);
    }

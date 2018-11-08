@@ -6,3 +6,9 @@
 *.dylib
 *.dSYM/
 a.out
+Makefile
+autom4te.cache/
+config.log
+config.status
+configure
+crud.report

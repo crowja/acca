@@ -8,5 +8,6 @@ contrapositive ~y => ~x.
 Acca assesses a simple assertion (a statement and its contrapositive) for
 identifying potentially causal relationships. A statement of the form x => y is
 scored as S(x => y) := prob(y | x) prob(~x | ~y) with the conditional
-probabilities estimated from a set of data. A values of S near unity is viewed
-as an indictor of a good candidate for a causally-related assertion.
+probabilities estimated from a set of data. A value of S near unity is viewed
+as an indicator of a good candidate for a causally-related assertion.
+

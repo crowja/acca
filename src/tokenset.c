@@ -1,3 +1,12 @@
+/**
+ *  @file tokenset.c
+ *  @version 0.0-alpha
+ *  @date Thu Nov  1 09:20:36 CDT 2018
+ *  @copyright %COPYRIGHT%
+ *  @brief FIXME
+ *  @details FIXME
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -14,7 +23,7 @@
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "20180925-pre";
+static const char version[] = "1.0";
 
 struct _token {
    char       *text;
@@ -33,7 +42,6 @@ _text_sort(struct _token *a, struct _token *b)
    return strcmp(a->text, b->text);
 }
 
-
 /*** tokenset_new() ***/
 
 struct tokenset *
@@ -41,7 +49,7 @@ tokenset_new(void)
 {
    struct tokenset *tp;
 
-   tp = (struct tokenset *) malloc(sizeof (struct tokenset));
+   tp = (struct tokenset *) malloc(sizeof(struct tokenset));
    if (_IS_NULL(tp))
       return NULL;
 
@@ -50,7 +58,6 @@ tokenset_new(void)
 
    return tp;
 }
-
 
 /*** tokenset_free() ***/
 
@@ -76,7 +83,6 @@ tokenset_free(struct tokenset *p)
    _FREE(p);
 }
 
-
 /*** tokenset_version() ***/
 
 const char *
@@ -84,7 +90,6 @@ tokenset_version(void)
 {
    return version;
 }
-
 
 /*** tokenset_add() ***/
 
@@ -98,8 +103,8 @@ tokenset_add(struct tokenset *p, char *n)
    if (!_IS_NULL(s))
       return s->id;
 
-   s = (struct _token *) malloc(sizeof (struct _token));
-   s->text = malloc((1 + strlen(n)) * sizeof (char));
+   s = (struct _token *) malloc(sizeof(struct _token));
+   s->text = malloc((1 + strlen(n)) * sizeof(char));
    strcpy(s->text, n);
 
    s->id = p->size;
@@ -115,7 +120,6 @@ tokenset_add(struct tokenset *p, char *n)
    return s->id;
 }
 
-
 /*** tokenset_count() ***/
 
 int
@@ -123,7 +127,6 @@ tokenset_count(struct tokenset *p)
 {
    return HASH_COUNT(p->tokens);
 }
-
 
 /*** tokenset_exists() ***/
 
@@ -137,7 +140,6 @@ tokenset_exists(struct tokenset *p, char *n)
    return _IS_NULL(s) ? 0 : 1;
 }
 
-
 /*** tokenset_get() ***/
 
 char      **
@@ -145,11 +147,11 @@ tokenset_get(struct tokenset *p)
 {
    struct _token *s = p->tokens;
    int         last = tokenset_count(p);
-   char      **list = (char **) calloc(1 + last, sizeof (char *));
+   char      **list = (char **) calloc(1 + last, sizeof(char *));
    int         i;
 
    for (i = 0; i < last; i++) {
-      list[i] = (char *) calloc(1 + strlen(s->text), sizeof (char));
+      list[i] = (char *) calloc(1 + strlen(s->text), sizeof(char));
       strcpy(list[i], s->text);
       /* printf("REPORT: %s\n", list[i]); */
       s = s->hh.next;
@@ -159,7 +161,6 @@ tokenset_get(struct tokenset *p)
 
    return list;
 }
-
 
 /*** tokenset_get_by_id() ***/
 
@@ -181,7 +182,6 @@ tokenset_get_by_id(struct tokenset *p, unsigned id)
 
    return NULL;
 }
-
 
 /*** tokenset_id() ***/
 
@@ -217,15 +217,12 @@ tokenset_remove(struct tokenset *p, char *n)
    _FREE(s);
 }
 
-
 /*** tokenset_reset() ***/
 
 void
 tokenset_reset(struct tokenset *p)
 {
-
    struct _token *s;
-
    struct _token *t = p->tokens;
 
    while (t != NULL) {
@@ -239,7 +236,6 @@ tokenset_reset(struct tokenset *p)
    p->size = 0;
 }
 
-
 /*** tokenset_sort() ***/
 
 void
@@ -248,6 +244,5 @@ tokenset_sort(struct tokenset *p)
    HASH_SORT(p->tokens, _text_sort);
 }
 
-
-#undef _IS_NULL
-#undef _FREE
+#undef  _IS_NULL
+#undef  _FREE

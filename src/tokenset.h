@@ -1,3 +1,12 @@
+/**
+ *  @file tokenset.h
+ *  @version 0.0-alpha
+ *  @date Thu Nov  1 09:20:36 CDT 2018
+ *  @copyright %COPYRIGHT%
+ *  @brief FIXME
+ *  @details FIXME
+ */
+
 #ifndef _TOKENSET_H_
 #define _TOKENSET_H_
 

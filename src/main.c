@@ -176,13 +176,13 @@ set_scores(struct options *o, unsigned r, unsigned c)
 #if 0
    printf("%f\t%f\t|%f\n", table[0 * c + 0], table[0 * c + 1], rowsums[0]);
    printf("%f\t%f\t|%f\n", table[1 * c + 0], table[1 * c + 1], rowsums[1]);
+   printf("%f\t%f\t|%f\n", table[2 * c + 0], table[2 * c + 1], rowsums[2]);
    printf("- - - - - - - - - - - - - - - - - - - - - - \n");
    printf("------------ %f\t%f\t|%f\n", colsums[0], colsums[1], allsums);
 #endif
 
    for (i = 0; i < r; i++) {
-
-      if (rowsums[i] < tol * allsums + 10)
+      if (rowsums[i] < tol * allsums)
          continue;
 
       xlabel = tokenset_get_by_id(xlabels, i);
@@ -195,7 +195,7 @@ set_scores(struct options *o, unsigned r, unsigned c)
 
          ylabel = tokenset_get_by_id(ylabels, j);
 
-         if (colsums[j] < tol * allsums + 10)
+         if (colsums[j] < tol * allsums)
             continue;
 
          /* Assertion 1:  x[i] =>  y[j], ~y[j] => ~x[i] */
@@ -263,14 +263,20 @@ main(int argc, char *argv[])
 
 
 #ifdef  _OPENMP
-   if (o->nthreads > 1) {                        /* otherwise OpenMP default */
+   if (o->nthreads > 0) {                        /* otherwise OpenMP default */
       unsigned    max_threads = omp_get_max_threads();
       o->nthreads = o->nthreads < max_threads ? o->nthreads : max_threads;
       omp_set_num_threads(o->nthreads);
    }
+   else
+      o->nthreads = omp_get_max_threads();
 
-   if (o->verbosity > 0)
-      printf("Using %d OpenMP thread(s)\n", omp_get_max_threads());
+   if (o->verbosity > 0) {
+      if (o->nthreads == 1)
+         printf("Using 1 OpenMP thread\n");
+      else
+         printf("Using %d OpenMP threads\n", o->nthreads);
+   }
 #endif
 
    /* Get the input data */

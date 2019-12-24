@@ -1,4 +1,4 @@
-# Acca 0.3.0-dev0
+# Acca 0.3.1-dev0
 
 Assessment of categorical causal assertions.
 

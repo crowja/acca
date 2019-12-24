@@ -8,7 +8,8 @@ SRC_DIR      = ./src
 BUILD_DIR    = ./build
 
 CC           = gcc
-CPPFLAGS     = -I$(SRC_DIR) -DPACKAGE_VERSION="@PACKAGE_VERSION@"
+#CPPFLAGS     = -I$(SRC_DIR) -DPACKAGE_VERSION="@PACKAGE_VERSION@"
+CPPFLAGS     = -I$(SRC_DIR)
 CFLAGS       = -std=c99 -pedantic -Wall @OPENMP_CFLAGS@
 LDFLAGS      =
 

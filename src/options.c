@@ -51,7 +51,7 @@ options_new(void)
 
    tp->all_asserts_flag = 0;
    tp->appname = "acca";
-   tp->appvers = "0.3.1-dev0";
+   tp->appvers = "0.3.2-dev0";
    tp->fname = NULL;
    tp->help_flag = 0;
    tp->nthreads = 0;

@@ -22,10 +22,13 @@ morning as well as the condition of the front lawn:
 | Raining |     0    |     9    |
 | Sunny   |     5    |     3    |
 
+The file [rainy.txt](ex/rainy.txt) provides this data and demonstrates
+Acca input. Lines beginning with # are treated as comments.
+
 The lawn will be wet if it's raining, but it could be wet for other reasons
 such as sprinklers, nighttime rain. Acca will attempt to discover the
-relationship Raining => Lawn wet. The file [rainy.txt](ex/rainy.txt) provides
-an example of Acca input. Acca will produce the output
+relationship Raining => Lawn wet.
+Acca will produce the output
 
      Tokenset x count 3, tokenset y count 2
      1.000000 1.000000 [9.000000 17.000000] x:is_raining => y:lawn_is_wet

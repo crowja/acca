@@ -24,4 +24,5 @@ morning as well as the condition of the front lawn:
 
 The lawn will be wet if it's raining, but it could be wet for other reasons
 such as sprinklers, nighttime rain. Acca will attempt to discover the
-relationship Raining => Lawn wet.
+relationship Raining => Lawn wet. The file [rainy.txt](ex/rainy.txt) provides
+an example of Acca input.

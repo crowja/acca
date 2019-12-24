@@ -1,0 +1,59 @@
+# Example input file for acca.
+# Four weeks of daily observations on the current weather (is_sunny, is_raining,
+# is_cloudy) and the condition of the lawn (lawn_is_dry, lawn_is_wet).
+# Day 1
+is_sunny lawn_is_dry
+# Day 2
+is_sunny lawn_is_dry
+# Day 3
+is_sunny lawn_is_dry
+# Day 4
+is_sunny lawn_is_dry
+# Day 5
+is_sunny lawn_is_dry
+# Day 6
+is_sunny lawn_is_wet
+# Day 7
+is_sunny lawn_is_wet
+# Day 8
+is_sunny lawn_is_wet
+# Day 9
+is_raining lawn_is_wet
+# Day 10
+is_raining lawn_is_wet
+# Day 11
+is_raining lawn_is_wet
+# Day 12
+is_raining lawn_is_wet
+# Day 13
+is_raining lawn_is_wet
+# Day 14
+is_raining lawn_is_wet
+# Day 15
+is_raining lawn_is_wet
+# Day 16
+is_raining lawn_is_wet
+# Day 17
+is_raining lawn_is_wet
+# Day 18
+is_cloudy lawn_is_dry
+# Day 19
+is_cloudy lawn_is_dry
+# Day 20
+is_cloudy lawn_is_dry
+# Day 21
+is_cloudy lawn_is_dry
+# Day 22
+is_cloudy lawn_is_dry
+# Day 23
+is_cloudy lawn_is_wet
+# Day 24
+is_cloudy lawn_is_wet
+# Day 25
+is_cloudy lawn_is_wet
+# Day 26
+is_cloudy lawn_is_wet
+# Day 27
+is_cloudy lawn_is_wet
+# Day 28
+is_cloudy lawn_is_dry

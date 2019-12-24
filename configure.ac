@@ -4,7 +4,7 @@ dnl else) will cause the generated configure to barf on finding
 dnl a working C compiler.
 AC_INIT(
   [Assessment of categorical causal assertions],
-  [0.2.1],
+  [0.3.0-dev0],
   [crowja@gmail.com],
   [acca],
   [],

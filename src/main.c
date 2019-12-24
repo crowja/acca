@@ -1,6 +1,6 @@
 /**
  *  @file main.c
- *  @version 0.2.1
+ *  @version 0.3.0-dev0
  *  @date Sat Nov  3 19:40:11 CDT 2018
  *  @copyright %COPYRIGHT%
  *  @brief FIXME

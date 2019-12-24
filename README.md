@@ -25,11 +25,11 @@ morning as well as the condition of the front lawn:
 The lawn will be wet if it's raining, but it could be wet for other reasons
 such as sprinklers, nighttime rain. Acca will attempt to discover the
 relationship Raining => Lawn wet. The file [rainy.txt](ex/rainy.txt) provides
-an example of Acca input; Acca (acca -a) will produce the output
+an example of Acca input. Acca will produce the output
 
      Tokenset x count 3, tokenset y count 2
      1.000000 1.000000 [9.000000 17.000000] x:is_raining => y:lawn_is_wet
 
 reporting there were three categorical values of x (is\_cloudy, is\_raining, 
-is\_sunny) and two of y (lawn\_is\_dry, lawn\_is\_wet), and that it finds the
-plausible relationship is\_raining => lawn\_is\_wet.
+is\_sunny) in the data set and two of y (lawn\_is\_dry, lawn\_is\_wet), and
+that it finds the plausible relationship is\_raining => lawn\_is\_wet.

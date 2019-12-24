@@ -26,13 +26,14 @@ The file [rainy.txt](ex/rainy.txt) provides this data and demonstrates
 Acca input. Lines beginning with # are treated as comments.
 
 The lawn will be wet if it's raining, but it could be wet for other reasons
-such as sprinklers, nighttime rain. Acca will attempt to discover the
+such as sprinklers, nighttime rain, dew. Acca will attempt to discover the
 relationship Raining => Lawn wet.
-Acca will produce the output
+
+For this input data Acca will report
 
      Tokenset x count 3, tokenset y count 2
      1.000000 1.000000 [9.000000 17.000000] x:is_raining => y:lawn_is_wet
 
-reporting there were three categorical values of x (is\_cloudy, is\_raining, 
-is\_sunny) in the data set and two of y (lawn\_is\_dry, lawn\_is\_wet), and
-that it finds the plausible relationship is\_raining => lawn\_is\_wet.
+there were three categorical values of x (is\_cloudy, is\_raining, is\_sunny)
+in the data set and two of y (lawn\_is\_dry, lawn\_is\_wet), and that it finds
+the plausible relationship is\_raining => lawn\_is\_wet.

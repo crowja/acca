@@ -1,6 +1,6 @@
 /**
  *  @file main.c
- *  @version 0.3.2-dev0
+ *  @version 0.4.0-dev0
  *  @date Sat Nov  3 19:40:11 CDT 2018
  *  @copyright 2020 John A. Crow <crowja@gmail.com>
  *  @license Unlicense <http://unlicense.org/>

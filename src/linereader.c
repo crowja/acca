@@ -1,3 +1,11 @@
+/**
+ *  @file linereader.c
+ *  @version 0.2.0-dev0
+ *  @date Fri Dec  6 09:54:07 CST 2019
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -19,23 +27,18 @@
 #endif
 #define _BUFSIZE      1024                       /* _BUFSIZE > 1 */
 
-static const char version[] = "20111128";
-
 struct linereader {
    FILE       *in;
    char        buf[_BUFSIZE];
    struct varstr *text;
 };
 
-
-/*** linereader_new() ***/
-
 struct linereader *
 linereader_new(void)
 {
    struct linereader *tp;
 
-   tp = (struct linereader *) malloc(sizeof (struct linereader));
+   tp = (struct linereader *) malloc(sizeof(struct linereader));
    if (_IS_NULL(tp))
       return NULL;
 
@@ -45,34 +48,26 @@ linereader_new(void)
    return tp;
 }
 
-
-/*** linereader_free() ***/
-
 void
-linereader_free(struct linereader *p)
+linereader_free(struct linereader **pp)
 {
-   if (_IS_NULL(p))
+   if (_IS_NULL(*pp))
       return;
 
-   varstr_free(p->text);
+   varstr_free(&(*pp)->text);
 
-   if (p->in != stdin && !_IS_NULL(p->in))
-      fclose(p->in);
+   if ((*pp)->in != stdin && !_IS_NULL((*pp)->in))
+      fclose((*pp)->in);
 
-   _FREE(p);
+   _FREE(*pp);
+   *pp = NULL;
 }
-
-
-/*** linereader_version() ***/
 
 const char *
 linereader_version(void)
 {
-   return version;
+   return "0.2.0-dev0";
 }
-
-
-/*** linereader_init() ***/
 
 int
 linereader_init(struct linereader *p, char *fname)
@@ -87,8 +82,6 @@ linereader_init(struct linereader *p, char *fname)
 
    return 0;
 }
-
-/*** linereader_next() ***/
 
 const char *
 linereader_next(struct linereader *p)
@@ -115,5 +108,6 @@ linereader_next(struct linereader *p)
    return (const char *) varstr_str(p->text);
 }
 
-#undef _IS_NULL
-#undef _FREE
+#undef  _IS_NULL
+#undef  _FREE
+#undef  _BUFSIZE

@@ -1,10 +1,9 @@
 /**
  *  @file linewrapper.h
- *  @version 0.0-alpha
- *  @date %TODAY%
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @version 0.1.0-dev0
+ *  @date Thu Nov  1 08:19:13 CDT 2018
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #ifndef _LINEWRAPPER_H_
@@ -29,7 +28,7 @@ struct linewrapper *lwrap_new(void);
  *  @details FIXME longer description here ...
  */
 
-void        lwrap_free(struct linewrapper *p);
+void        lwrap_free(struct linewrapper **pp);
 
 /**
  *  @brief Return the version of this package.

@@ -1,10 +1,9 @@
 /**
  *  @file tokenset.h
- *  @version 0.0-alpha
- *  @date Thu Nov  1 09:20:36 CDT 2018
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @version 1.4.0-dev0
+ *  @date Tue Dec 10 12:49:29 CST 2019
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #ifndef _TOKENSET_H_
@@ -38,11 +37,11 @@ struct tokenset *tokenset_new(void);
  *  @param[in] p Pointer to a tokenset object
  */
 
-void        tokenset_free(struct tokenset *p);
+void        tokenset_free(struct tokenset **pp);
 
 /**
  *  @brief Adds a string to the tokenset.
- *  @details Adds the string if it isn't already in the tokenset,
+ *  @details Adds the string (token) if it isn't already in the tokenset,
  *  otherwise does nothing.
  *  @param[in] p Pointer to a tokenset object
  *  @param[in] n Pointer to a string to add.
@@ -56,63 +55,66 @@ int         tokenset_add(struct tokenset *p, char *n);
  *  @brief Number of tokens added to the tokenset.
  *  @details This provides the count of the FIXME
  *  @param p Pointer to a tokenset object
- *  @returns TODO
+ *  @returns Returns the number of tokens in the tokenset.
  */
 
 int         tokenset_count(struct tokenset *p);
 
 /** 
- *  @brief Brief info on what this does to a tokenset object
- *  @details TODO
- *  @param p Pointer to a tokenset object
- *  @param x Magic info
- *  @returns TODO
+ *  @brief Checks if a token is already in the tokenset.
+ *  @details Checks if a string (token) is already in the tokenset.
+ *  @param p Pointer to a tokenset object.
+ *  @param n String to check.
+ *  @returns Nonzero if the string exists, zero otherwise.
  */
 
 int         tokenset_exists(struct tokenset *p, char *n);
 
 /**
- *  @brief Clean up and free a tokenset structure
- *  @details TODO
- *  @param p Pointer to a tokenset object
- *  @returns TODO
+ *  @brief Return the list of tokens in a tokenset.
+ *  @details Returns a NULL-terminated list of tokens in the tokenset.
+ *  @param p Pointer to a tokenset object.
+ *  @returns NULL-terminated list of strings.
  */
 
 char      **tokenset_get(struct tokenset *p);
 
 /**
- *  @brief Clean up and free a tokenset structure
- *  @details TODO
- *  @param p Pointer to a tokenset object
- *  @returns TODO
+ *  @brief Return the token associated with an id.
+ *  @details Each token is associated with a unique id. Return the
+ *  token associated with id.
+ *  @param p Pointer to a tokenset object.
+ *  @param id Identifier.
+ *  @returns String associated with id.
  */
 
 const char *tokenset_get_by_id(struct tokenset *p, unsigned id);
 
 /**
- *  @brief Brief info on what this does to a tokenset object
- *  @details TODO
+ *  @brief Removes a token from the tokenset.
+ *  @details If the specified token (string) is found in the tokenset,
+ *  remove it.
  *  @param p Pointer to a tokenset object
- *  @param x Magic info
- *  @returns TODO
+ *  @param n String to remove, if found.
  */
 
 void        tokenset_remove(struct tokenset *p, char *n);
 
 /**
- *  @brief Brief info on what this does to a tokenset object
- *  @details TODO
+ *  @brief Returns the id associated with a token.
+ *  @details Returns the id associated with a token/string.
  *  @param p Pointer to a tokenset object
- *  @param x Magic info
- *  @returns TODO
+ *  @param n String.
+ *  @returns id of the token, if found, -1 otherwise.
  */
 
 int         tokenset_id(struct tokenset *p, char *n);
 
 
 /**
- *  @brief Clean up and free a tokenset structure
- *  @details TODO
+ *  @brief Removes all tokens from a tokenset.
+ *  @details Removes all tokens/strings from a tokenset, but
+ *  does not remove the tokenset itself as does tokenset_free().
  *  @param p Pointer to a tokenset object
  *  @returns TODO
  */
@@ -120,10 +122,11 @@ int         tokenset_id(struct tokenset *p, char *n);
 void        tokenset_reset(struct tokenset *p);
 
 /**
- *  @brief Clean up and free a tokenset structure
- *  @details TODO
+ *  @brief Lexicographically sort the tokenset.
+ *  @details Sort the tokenset lexicographically so that,
+ *  for example, the list returned by tokenset_get() is
+ *  ordered. Does not change the token-id pairing.
  *  @param p Pointer to a tokenset object
- *  @returns TODO
  */
 
 void        tokenset_sort(struct tokenset *p);

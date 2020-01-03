@@ -1,7 +1,9 @@
 /**
  *  @file linereader.h
- *  @brief FIXME
- *  @details FIXME
+ *  @version 0.2.0-dev0
+ *  @date Fri Dec  6 09:54:07 CST 2019
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #ifndef _LINEREADER_H_
@@ -23,7 +25,7 @@ struct linereader *linereader_new(void);
  *  @details FIXME longer description here ...
  */
 
-void        linereader_free(struct linereader *p);
+void        linereader_free(struct linereader **pp);
 
 /**
  *

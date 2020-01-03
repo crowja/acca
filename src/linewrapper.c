@@ -1,10 +1,9 @@
 /**
  *  @file linewrapper.c
- *  @version 0.0-alpha
- *  @date %TODAY%
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @version 0.1.0-dev0
+ *  @date Thu Nov  1 08:19:13 CDT 2018
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #include <stdlib.h>
@@ -24,13 +23,9 @@
 #endif
 #define _FREE(p)      ((NULL == (p)) ? (0) : (free((p)), (p) = NULL))
 
-static const char version[] = "0.0-alpha";
-
 struct linewrapper {
    struct varstr *s;
 };
-
-/*** lwrap_new() ***/
 
 struct linewrapper *
 lwrap_new(void)
@@ -46,22 +41,19 @@ lwrap_new(void)
    return tp;
 }
 
-/*** lwrap_free() ***/
-
 void
-lwrap_free(struct linewrapper *p)
+lwrap_free(struct linewrapper **pp)
 {
-   if (!_IS_NULL(p->s))
-      varstr_free(p->s);
-   _FREE(p);
+   if (!_IS_NULL((*pp)->s))
+      varstr_free(&(*pp)->s);
+   _FREE(*pp);
+   *pp = NULL;
 }
-
-/*** lwrap_version() ***/
 
 const char *
 lwrap_version(void)
 {
-   return version;
+   return "0.1.0-dev0";
 }
 
 static void
@@ -72,8 +64,6 @@ _insert_spaces(struct varstr *x, unsigned n)
    for (i = 0; i < n; i++)
       varstr_catc(x, ' ');
 }
-
-/*** lwrap_format() ***/
 
 char       *
 lwrap_format(struct linewrapper *p, const unsigned indent, const unsigned width,
@@ -151,6 +141,5 @@ lwrap_format(struct linewrapper *p, const unsigned indent, const unsigned width,
    return varstr_str(p->s);
 }
 
-
-#undef _IS_NULL
-#undef _FREE
+#undef  _IS_NULL
+#undef  _FREE

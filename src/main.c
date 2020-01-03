@@ -2,9 +2,8 @@
  *  @file main.c
  *  @version 0.3.2-dev0
  *  @date Sat Nov  3 19:40:11 CDT 2018
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #include <stdlib.h>
@@ -182,7 +181,7 @@ set_scores(struct options *o, unsigned r, unsigned c)
 #endif
 
    for (i = 0; i < r; i++) {
-      if (rowsums[i] < tol * allsums)
+      if (rowsums[i] < 10 + tol * allsums)
          continue;
 
       xlabel = tokenset_get_by_id(xlabels, i);
@@ -195,7 +194,7 @@ set_scores(struct options *o, unsigned r, unsigned c)
 
          ylabel = tokenset_get_by_id(ylabels, j);
 
-         if (colsums[j] < tol * allsums)
+         if (colsums[j] < 10 + tol * allsums)
             continue;
 
          /* Assertion 1:  x[i] =>  y[j], ~y[j] => ~x[i] */

@@ -1,9 +1,8 @@
 /**
  *  @file main.h
  *  @date Sat Nov  3 19:40:11 CDT 2018
- *  @copyright %COPYRIGHT%
- *  @brief FIXME
- *  @details FIXME
+ *  @copyright 2020 John A. Crow <crowja@gmail.com>
+ *  @license Unlicense <http://unlicense.org/>
  */
 
 #ifndef _MAIN_H_

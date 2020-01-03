@@ -22,8 +22,8 @@ morning as well as the condition of the front lawn:
 | Raining |     0    |     9    |
 | Sunny   |     5    |     3    |
 
-The file [rainy.txt](ex/rainy.txt) provides this data and demonstrates
-Acca input. Lines beginning with # are treated as comments.
+The file [rainy.txt](ex/rainy.txt) provides the data summarized in the table and
+demonstrates Acca input. Lines beginning with # are treated as comments.
 
 The lawn will be wet if it's raining, but it could be wet for other reasons
 such as sprinklers, nighttime rain, dew. Acca will attempt to discover the

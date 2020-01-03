@@ -59,7 +59,7 @@ read_input(char *fname)
    r = linereader_new();
    if (!_IS_NULL(fname) && linereader_init(r, fname)) {
       fprintf(stderr, "[FATAL ERROR] Cannot open input file \"%s\"\n", fname);
-      linereader_free(r);
+      linereader_free(&r);
       return 1;
    }
 
@@ -74,7 +74,7 @@ read_input(char *fname)
             _FREE(yids);
             _FREE(xword);
             _FREE(yword);
-            linereader_free(r);
+            linereader_free(&r);
             return 1;
          }
 
@@ -93,7 +93,7 @@ read_input(char *fname)
             _FREE(yids);
             _FREE(xword);
             _FREE(yword);
-            linereader_free(r);
+            linereader_free(&r);
             return 1;
          }
 
@@ -124,7 +124,7 @@ read_input(char *fname)
 
    _FREE(xword);
    _FREE(yword);
-   linereader_free(r);
+   linereader_free(&r);
 
    return 0;
 }
@@ -250,13 +250,13 @@ main(int argc, char *argv[])
 
    if (o->help_flag) {
       options_help_msg(o, stderr);
-      options_free(o);
+      options_free(&o);
       exit(0);
    }
 
    if (o->version_flag) {
       printf("%s version %s\n", o->appname, o->appvers);
-      options_free(o);
+      options_free(&o);
       exit(0);
    }
 
@@ -305,11 +305,11 @@ main(int argc, char *argv[])
 
    set_scores(o, r, c);
 
-   tokenset_free(xlabels);
-   tokenset_free(ylabels);
+   tokenset_free(&xlabels);
+   tokenset_free(&ylabels);
    _FREE(xids);                                  /* xids and yids malloced in read_input() */
    _FREE(yids);
-   options_free(o);
+   options_free(&o);
 
    return 0;
 }

@@ -65,13 +65,14 @@ options_new(void)
 /*** options_free() ***/
 
 void
-options_free(struct options *p)
+options_free(struct options **pp)
 {
-   if (_IS_NULL(p))
+   if (_IS_NULL(*pp))
       return;
 
-   _FREE(p->fname);
-   _FREE(p);
+   _FREE((*pp)->fname);
+   _FREE(*pp);
+   *pp = NULL;
 }
 
 /*** options_help_msg() ***/
@@ -117,7 +118,7 @@ options_help_msg(struct options *p, FILE *out)
    fprintf(out, "%s\n",
            lwrap_format(w, indent, width, "Print the version information and exit."));
 
-   lwrap_free(w);
+   lwrap_free(&w);
 }
 
 
